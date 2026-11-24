@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="ru">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#0b1422">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="stylesheet" href="style.css">
+  <title>JARVIS PC CONTROL</title>
+</head>
+
+<body>
+  <main class="shell">
+    <header>
+      <div>
+        <div class="eyebrow">REMOTE MANAGEMENT</div>
+        <h1>◈ JARVIS <span>PC CONTROL</span></h1>
+      </div>
+      <div id="account" class="muted"></div>
+    </header>
+    <section id="loginPanel" class="panel">
+      <h2>Вход администратора</h2>
+      <form id="loginForm"><label>Email<input id="email" type="email" autocomplete="username"
+            required></label><label>Пароль<input id="password" type="password" autocomplete="current-password"
+            required></label><button type="submit">Войти</button></form>
+      <p id="loginError" class="error"></p>
+    </section>
+    <section id="dashboard" hidden>
+      <div class="toolbar">
+        <div><strong id="onlineCount">0 / 3 Online</strong>
+          <div class="muted small">Статус определяется по heartbeat (20 сек.)</div>
+        </div><button id="logout" class="outline">Выйти</button>
+      </div>
+      <div id="cards" class="cards"></div><button id="allOff" class="danger wide">⏻ Выключить все ПК (тест)</button>
+      <p class="muted small">Тест: команды записываются в Firebase, но текущий агент их не выполняет. После установки
+        нового агента поведение изменится.</p>
+      <p id="message" role="status"></p>
+    </section>
+    <footer>JARVIS PC CONTROL • FIREBASE RTDB</footer>
+  </main>
+  <script type="module" src="app.js"></script>
+</body>
+
+</html>
