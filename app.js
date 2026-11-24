@@ -9,8 +9,6 @@ const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'
 const format=s=>{s=Math.max(0,Math.floor(Number(s)||0));return [Math.floor(s/3600),Math.floor(s%3600/60),s%60].map(x=>String(x).padStart(2,'0')).join(':')};
 let connected=false, clockReady=false, anchor=0, tick=0;
 const now=()=>anchor+performance.now()-tick;
-onValue(ref(db,'.info/serverTimeOffset'),snap=>{anchor=Date.now()+Number(snap.val()||0);tick=performance.now();clockReady=true;render()});
-onValue(ref(db,'.info/connected'),snap=>{connected=snap.val()===true;render()});
 const icons={monitor:'<rect x="3" y="3" width="18" height="13" rx="2"/><path d="M12 16v5M7 21h10"/>',power:'<path d="M12 2v10M6 5a9 9 0 1 0 12 0"/>',rename:'<path d="m4 16 12-12 4 4L8 20H4zM13 7l4 4"/>'};
 const svg=k=>`<svg viewBox="0 0 24 24" aria-hidden="true">${icons[k]}</svg>`;
 function isOnline(d){const age=now()-Number(d?.heartbeat);return connected&&clockReady&&d?.status==='online'&&Number.isFinite(age)&&age<20000&&age>-60000}
@@ -33,6 +31,8 @@ async function sendShutdown(list){
 $('allOff').onclick=()=>sendShutdown(ids.filter(id=>isOnline(devices[id])));
 $('loginForm').onsubmit=async e=>{e.preventDefault();$('loginError').textContent='';try{await signInWithEmailAndPassword(auth,$('email').value.trim(),$('password').value)}catch(err){$('loginError').textContent='Не удалось войти: '+err.code}};
 $('logout').onclick=()=>signOut(auth);
+onValue(ref(db,'.info/serverTimeOffset'),snap=>{anchor=Date.now()+Number(snap.val()||0);tick=performance.now();clockReady=true;render()});
+onValue(ref(db,'.info/connected'),snap=>{connected=snap.val()===true;render()});
 onAuthStateChanged(auth,user=>{
   unsubscribers.forEach(stop=>stop());
   unsubscribers=[];
