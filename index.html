@@ -6,7 +6,9 @@
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
   <meta name="theme-color" content="#0b1422">
   <link rel="manifest" href="manifest.webmanifest">
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css?v=3">
+  <link rel="icon" href="icon-192.png">
+  <link rel="apple-touch-icon" href="icon-192.png">
   <title>JARVIS PC CONTROL</title>
 </head>
 
@@ -15,7 +17,7 @@
     <header>
       <div>
         <div class="eyebrow">REMOTE MANAGEMENT</div>
-        <h1>◈ JARVIS <span>PC CONTROL</span></h1>
+        <h1>JARVIS <span>PC CONTROL</span></h1>
       </div>
       <div id="account" class="muted"></div>
     </header>
@@ -28,18 +30,17 @@
     </section>
     <section id="dashboard" hidden>
       <div class="toolbar">
-        <div><strong id="onlineCount">0 / 3 Online</strong>
-          <div class="muted small">Статус определяется по heartbeat (20 сек.)</div>
+        <div><strong id="onlineCount">0 / 3 в сети</strong>
+          <div class="muted small">Мониторинг компьютеров</div>
         </div><button id="logout" class="outline">Выйти</button>
       </div>
-      <div id="cards" class="cards"></div><button id="allOff" class="danger wide">⏻ Выключить все ПК (тест)</button>
-      <p class="muted small">Тест: команды записываются в Firebase, но текущий агент их не выполняет. После установки
-        нового агента поведение изменится.</p>
+      <div id="cards" class="cards"></div><button id="allOff" class="danger wide">⏻ Выключить все ПК</button>
+      
       <p id="message" role="status"></p>
     </section>
-    <footer>JARVIS PC CONTROL • FIREBASE RTDB</footer>
+    <footer>JARVIS PC CONTROL • VERSION 3.0</footer>
   </main>
-  <script type="module" src="app.js"></script>
+  <script type="module" src="app.js?v=3"></script>
 </body>
 
 </html>
