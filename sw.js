@@ -1,4 +1,4 @@
-const CACHE='jarvis-pc-static-v4';
-self.addEventListener('install',e=>e.waitUntil(caches.open(CACHE).then(c=>c.addAll(['./','./index.html','./style.css?v=4','./icon-192.png','./icon-512.png','./manifest.webmanifest'])).then(()=>self.skipWaiting())));
+const CACHE='jarvis-pc-static-v4.1';
+self.addEventListener('install',e=>e.waitUntil(caches.open(CACHE).then(c=>c.addAll(['./','./index.html','./style.css?v=4.1','./icon-192.png','./icon-512.png','./manifest.webmanifest'])).then(()=>self.skipWaiting())));
 self.addEventListener('activate',e=>e.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(k=>k.startsWith('jarvis-pc-static-')&&k!==CACHE).map(k=>caches.delete(k)))).then(()=>self.clients.claim())));
 self.addEventListener('fetch',e=>{const u=new URL(e.request.url);if(e.request.method!=='GET'||u.origin!==self.location.origin||u.pathname.endsWith('.js'))return;e.respondWith(fetch(e.request,{cache:'no-cache'}).catch(()=>caches.match(e.request)));});
